@@ -1,0 +1,21 @@
+.login {
+    background: url(../../Customizations/images/background.jpg);
+}
+
+.signin-button {
+    background-color: navajowhite;    
+}
+
+h1 {
+    color: black;
+    font-weight: bold;
+}
+
+h2 {
+    color: black;
+    font-weight: bold;
+}
+
+body {
+    color: black;
+}

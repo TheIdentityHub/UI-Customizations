@@ -1,0 +1,76 @@
+﻿@using U2UConsult.Framework.Identity;
+@using U2UConsult.IdentityHub.Web.Resources.Shared;
+@using U2UConsult.IdentityHub.Common.Configuration;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundles/css")
+    @Styles.Render("~/" + ViewBag.Tenant + "/Home/SiteCss")
+    @Styles.Render("~/" + ViewBag.Tenant + "/Home/CustomSiteCss?tenant=" + ViewBag.Tenant)
+    @RenderSection("Head", required: false)
+    @Html.ApplicationInsightScript()
+    @if (!string.IsNullOrEmpty(HubConfiguration.GoogleTagManagerId))
+    {
+        <!-- Google Tag Manager -->
+        <script>
+    (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', '@HubConfiguration.GoogleTagManagerId');</script>
+        <!-- End Google Tag Manager -->
+    }
+</head>
+<body class="login">
+    @if (!string.IsNullOrEmpty(HubConfiguration.GoogleTagManagerId))
+    {
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=@HubConfiguration.GoogleTagManagerId"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    }
+    <nav class="navbar navbar-fixed-top">
+        @if (ViewBag.TenantModel != null)
+        {
+            <ul class="navbar">
+                <li>
+                    @Html.ActionLink((string)ViewBag.TenantModel.DisplayName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+            </ul>
+        }
+        @RenderSection("actionbar", required: false)
+    </nav>
+    <section>
+        <div class="body-content-full">
+            @RenderBody()
+        </div>
+    </section>
+    @Scripts.Render("~/bundles/main")
+    @RenderSection("scripts", required: false)
+    @if (!string.IsNullOrEmpty(HubConfiguration.GoogleAnalyticsTrackingId))
+    {
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', '@HubConfiguration.GoogleAnalyticsTrackingId', 'auto');
+            ga('send', 'pageview');
+        </script>
+    }
+</body>
+</html>
