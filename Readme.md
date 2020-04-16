@@ -8,10 +8,10 @@
 
 For more information see <a href="https://www.theidentityhub.com" target="_blank">https://www.theidentityhub.com</a>
 
-# Custom Claim Providers
+# Branding
 
 Customizing the look and feel
-The look and feel of The Identity Hub can be customized on different levels:
+The look and feel of The Identity Hub can be branded on different levels:
 
 - global (cross tenant)
 - tenant specific
